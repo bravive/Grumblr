@@ -1,0 +1,57 @@
+{% extends "../templates/Basepage.html" %}
+{% block title%} Profile {% endblock %}
+{% block myjs %}<script src="/static/myJS/myjs1.js"></script>{% endblock%}
+{% block csstheme %}<link href="/static/Profile/theme.css" rel="stylesheet">{% endblock %}
+{% block navbar %}
+<ul class="nav navbar-nav">
+  <li><a href="{% url 'grumblrApp_home' %}">Home</a></li>
+  <li class="active"><a href="#about">Profile</a></li>
+  <li ><a href="{% url 'grumblrApp_pro_edit' %}">Settings</a></li>
+</ul>
+{% endblock %}
+
+{% block big_photo %}
+	{% if id %}
+		<img src="{% url 'grumblrApp_photo' id %}" alt="{{entry.first_name.value}} {{entry.last_name.value}}" width="350px">
+	{% else %}
+		<img src="/static/Image/default.jpg"  alt="Cat-Downloaded"/>
+	{% endif %}
+{% endblock %}
+{% block personal_info%}
+<div class="panel panel-default">
+  <div class="panel-body">
+    <div><b>Username</b>: {{user_name}}</div>
+	<div><b>Email</b>: {{user_email}}</div>
+  </div>
+</div>
+{% endblock %}
+{% block righttitle %}Grumbls{% endblock %}
+{% block photo %}/static/Image/default.jpg{% endblock %}
+
+
+{% block username %}
+<a href="{% url 'grumblrApp_profile'%}"> <strong>{{item.user.username}}</strong></a>
+{% endblock %}
+
+{% block reply_input%}
+<div id="myinput{{item.id}}" class="myclass-smallsize">
+    <h4>COMMENTS:</h4>
+</div>
+{% endblock %}
+
+
+
+{% block myDlike%}
+<div id="mydlike{{item.id}}" class="myclass-smallsize">
+    <h4>DISLIKE:</h4>
+    {% for field in dislikes %}
+        {% ifequal field.id item.id%}
+            {% for subfield in field.dislike_user.all %}
+                {{subfield.username}}
+            {% endfor%}
+        {% endifequal %}
+    {% endfor %}
+</div>
+{% endblock %}
+
+

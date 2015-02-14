@@ -1,0 +1,9 @@
+[
+{% for dlike in dlikes %}
+  {"fields":
+  {
+  "dlike_usrname": "{{dlike.username}}"
+  }
+  }{% if not forloop.last %},{% endif %}
+{% endfor %}
+]

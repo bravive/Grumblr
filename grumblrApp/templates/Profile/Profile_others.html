@@ -1,0 +1,84 @@
+{% extends "../templates/Basepage.html" %}
+{% block title%} Profile {% endblock %}
+{% block myjs %}<script src="/static/myJS/myjs1.js"></script>{% endblock%}
+{% block csstheme %}<link href="/static/Profile/theme.css" rel="stylesheet">{% endblock %}
+{% block navbar %}
+<ul class="nav navbar-nav">
+  <li><a href="{% url 'grumblrApp_home' %}">Home</a></li>
+  <li><a href="{% url 'grumblrApp_profile' %}">Profile</a></li>
+  <li ><a href="{% url 'grumblrApp_pro_edit' %}">Settings</a></li>
+</ul>
+{% endblock %}
+{% block personal_info%}
+<div class="panel panel-default">
+  <div class="panel-body">
+    <div><b>Username</b>: {{user_name}}</div>
+	<div><b>Email</b>: {{user_email}}</div>
+  </div>
+</div>
+{% endblock %}
+{% block big_photo %}
+	{% if id %}
+		<img src="{% url 'grumblrApp_photo' id %}" alt="{{entry.first_name.value}} {{entry.last_name.value}}" width="350px">
+	{% else %}
+		<img src="/static/Image/default.jpg"  alt="Cat-Downloaded"/>
+	{% endif %}
+{% endblock %}
+
+{% block righttitle %}Grumbls{% endblock %}
+{% block photo %}/static/Image/default.jpg{% endblock %}
+{% block reply_page%}
+<form action="{% url 'grumblrApp_comment' item.id 3 %}"  method="post" >	
+	{% csrf_token %}
+{% endblock %}
+
+{% block function_button%}
+<div class="btn-group"> 
+	<form action="{% url 'grumblrApp_addblocking' %}" id="form_addblocking" method="post">
+		{% csrf_token %}
+		{% for field in form_relation.visible_fields %}
+			{{field}}
+		{% endfor %}
+	</form>
+	<form action="{% url 'grumblrApp_addunblocking' %}" id="form_addunblocking" method="post">
+		{% csrf_token %}
+		{% for field in form_relation.visible_fields %}
+			{{field}}
+		{% endfor %}
+	</form>
+	
+	{% if blocked_or_not %}
+	<button type="submit" form="form_addunblocking" name="unblocked_username" value="{{user_name}}" class="btn btn-success">To unBlock</button>
+	{% else %}
+    <button type="submit" form="form_addblocking" name="blocked_username" value="{{user_name}}" class="btn btn-success">To Block</button>
+	{% endif %}
+</div>
+{% endblock %}
+
+
+{% block reply_input%}
+<div id="myinput{{item.id}}" class="myclass-smallsize">
+    <h4>COMMENTS:</h4>
+</div>
+{% endblock %}
+
+
+
+{% block myDlike%}
+<div id="mydlike{{item.id}}" class="myclass-smallsize">
+    <h4>DISLIKE:</h4>
+    {% for field in dislikes %}
+    {% ifequal field.id item.id%}
+    {% for subfield in field.dislike_user.all %}
+    {{subfield.username}}
+    {% endfor%}
+    {% endifequal %}
+    {% endfor %}
+</div>
+{% endblock %}
+
+
+
+
+
+

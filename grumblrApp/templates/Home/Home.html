@@ -1,0 +1,31 @@
+{% extends "../templates/Basepage.html" %}
+{% block title%} Home {% endblock %}
+{% block csstheme %}<link href="/static/Home/theme.css" rel="stylesheet">{% endblock %}
+{% block navbar %}
+<ul class="nav navbar-nav">
+  <li class="active"><a href="#">Home</a></li>
+  <li ><a href="{% url 'grumblrApp_profile' %}">Profile</a></li>
+  <li ><a href="{% url 'grumblrApp_pro_edit' %}">Settings</a></li>
+</ul>
+{% endblock %}
+{% block big_photo %}
+	{% if id %}
+		<img src="{% url 'grumblrApp_photo' id %}" alt="{{entry.first_name.value}} {{entry.last_name.value}}" width="350px">
+	{% else %}
+		<img src="/static/Image/default.jpg"  alt="Cat-Downloaded"/>
+	{% endif %}
+{% endblock %}
+{% block leftfunctionform%}
+<form action="{% url 'grumblrApp_additem' %}"  method="post" class="navbar-form navbar-left">
+{% csrf_token %}
+	
+   <div class="form-group">
+			{% for field in form_compose.visible_fields %}
+				{{field}}
+			{% endfor %}
+   </div>
+      <input type="submit" class="btn btn-default" value="Send">
+</form>
+{% endblock %}
+{% block righttitle %}Follower Streams{% endblock %}
+{% block photo %}/static/Image/default.jpg{% endblock %}

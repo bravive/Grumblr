@@ -1,0 +1,54 @@
+
+p.word_postion{
+	float:right;
+	position:relative;
+	top:20px;
+	//font-color;
+}
+.myclass-contraint{
+	width:500px;
+	margin-left:100px;
+	float:left;
+}
+.myclass-width{
+	margin-right:100px;
+	margin-top:50px;
+	width:350px;
+	float:right;
+}
+.myclass-formPadding{
+	padding-right:30px;
+	padding-top:10px;
+	padding-bottom:10px;
+}
+.myclass-rightFloat{
+	float:right;
+}
+.myclass-box{
+	width:150px;
+	float:right;
+	margin-top:5px;
+}
+.myform-width460{
+	width:460px;
+}
+.mybtn-style{
+ width:301px;
+ float:left;
+ margin-top:20px;
+ margin-left:42px;
+}
+.myclass-smallsize{
+	height:0px;
+	overflow:hidden;
+}
+.myclass-largesize{
+	overflow:auto;
+}
+.myclass-Lwindowsize{
+    width:500px;
+}
+.myclass-Swindowsize{
+    width:0px;
+    height:0px;
+}

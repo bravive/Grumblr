@@ -1,0 +1,12 @@
+[
+{% for item in items %}
+ {"fields":
+    {
+        "grumblr": "{{item.text}}",
+        "grumblr_id": {{item.id}},
+        "grumblr_username": "{{item.user.username}}",
+        "grumblr_userid": {{item.user.id}}
+    }
+ }{% if not forloop.last %},{% endif %}
+{% endfor %}
+]

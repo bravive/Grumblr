@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+		<link rel="icon" href="/static/Image/The letter G.jpg">
+
+    <title>Theme Template for Bootstrap</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="/static/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap theme -->
+    <link href="/static/dist/css/bootstrap-theme.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="/static/Pro_edit/theme.css" rel="stylesheet">
+		<link href="/static/myCss/mycss.css" rel="stylesheet">
+
+    <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
+    <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+    <script src="/static/assets/js/ie-emulation-modes-warning.js"></script>
+
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="/static/assets/js/ie10-viewport-bug-workaround.js"></script>
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+
+  <body role="document">
+
+    <!-- Fixed navbar -->
+    <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+      <div class="container">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="#">Grumblr</a>
+        </div>
+        <div class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+            <li><a href="{% url 'grumblrApp_home' %}">Home</a></li>
+            <li><a href="{% url 'grumblrApp_profile' %}">Profile</a></li>
+            <li class="active"><a href="#contact">Settings</a></li>
+          </ul>
+					<ul class="nav navbar-nav navbar-right">
+						  <li ><a href="{% url 'grumblrApp_mylogout' %}">Logout</a></li>
+					</ul>
+					<form action="{% url 'grumblrApp_search' %}" method="post" class="navbar-form navbar-right" role="search">
+						{% csrf_token %}
+					    <input type="text" name="search" class="form-control" placeholder="Search" onkeydown='if(event.keyCode==13){gosubmit();}'/>  
+					</form>
+				</div>
+      </div>
+    </div>
+		
+		<div class="container" style="width:1100px">
+			<div class="navbar-header">
+				<div class="jumbotron" style="margin-left:10px;margin-top:8px;padding:10px;width:350px">
+				
+					<div >
+			    	<a href="#" class="thumbnail ">
+			      	<img src="/static/Image/Cat1.jpg"  alt="Cat-Downloaded"/>
+			    	</a>
+					</div>
+				
+					<div>
+						<div class="panel panel-default">
+						  <div class="panel-body">
+						    <div><b>Username</b>: Oliver</div>
+								<div><b>Email</b>:Oliver@gmail.com</div>
+								<div><b>College</b>:Carnegie Mellon University</div>
+						  </div>
+						</div>
+						<div>
+							<a href="#">Grumbles<span class="badge">111</span></a>
+							<a href="#">Followers<span class="badge">222</span></a>
+							<a href="#">Follows <span class="badge">333</span></a>
+						</div>
+				  </div>
+				</div>
+			
+				<div class="jumbotron" style="margin-left:10px;margin-top:-20px;padding:10px;width:350px">
+					<div class="list-group" style="margin-bottom:5px">
+					  <a href="#" class="list-group-item active">Account </a>
+					  <a href="#" class="list-group-item">Password</a>
+					  <a href="#" class="list-group-item">Profile</a>
+					</div>
+				</div>
+			</div>
+			
+			<div class="navbar-form navbar-right">
+				<div class="jumbotron " style="margin-right:100px;margin-top:8px;padding:10px;width:500px">
+					
+					<div style="padding-left:20px">
+						<h2>Account</h2>
+					</div>
+					
+					<div class="input-group" style="margin:10px;margin-left:40px">
+					  <b>Username:</b><br>
+					  <input type="text" class="form-control" placeholder="Username" style="width:300px">
+					</div>
+
+					<div class="input-group" style="margin:10px;margin-left:40px">
+					  <b>Email:</b><br>
+					  <input type="text" class="form-control" placeholder="xxxxxx@xxxxx.xxx" style="width:300px">
+					</div>
+
+					<div class="input-group" style="margin:10px;margin-left:40px">
+					  <b>Country:</b><br>
+					  <input type="text" class="form-control" placeholder="Country" style="width:300px">
+					</div>
+					
+					<div class="input-group" style="margin:10px;;margin-left:40px">
+					  <b>Language:</b><br>
+					  <input type="text" class="form-control" placeholder="Language" style="width:300px">
+					</div>
+					<div style="margin-left:200px;margin-top:40px">
+						<button type="button" class="btn btn-lg btn-primary" style="margin:10px">Cancel</button>
+						<button type="button" class="btn btn-lg btn-primary" style="margin:10px"> Save </button>
+					</div>
+				</div>
+			</div>
+			
+		</div>
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="/static/dist/js/bootstrap.min.js"></script>
+    <script src="/static/assets/js/docs.min.js"></script>
+  </body>
+</html>

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+		<link rel="icon" href="/static/Image/The letter G.jpg">
+
+    <title>Theme Template for Bootstrap</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="/static/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap theme -->
+    <link href="/static/dist/css/bootstrap-theme.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="/static/Home/theme.css" rel="stylesheet">
+		<link href="/static/myCss/mycss.css" rel="stylesheet">
+
+    <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
+    <!--[if lt IE 9]><script src="/static/staticassets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+    <script src="/static/assets/js/ie-emulation-modes-warning.js"></script>
+
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="/static/assets/js/ie10-viewport-bug-workaround.js"></script>
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+
+  <body role="document">
+
+    <!-- Fixed navbar -->
+    <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+      <div class="container">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="#">Searching...</a>
+        </div>
+        <div class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+            <li><a href="{% url 'grumblrApp_home' %}">Home</a></li>
+            <li ><a href="{% url 'grumblrApp_profile' %}">Profile</a></li>
+            <li ><a href="{% url 'grumblrApp_pro_edit' %}">Settings</a></li>
+          </ul>
+					<ul class="nav navbar-nav navbar-right">
+						  <li ><a href="{% url 'grumblrApp_mylogout' %}">Logout</a></li>
+					</ul>
+				</div>
+      </div>
+    </div>
+		<div class="container" style="width:1100px">
+			<form action="{% url 'grumblrApp_search' %}" method="post" role="search">
+				{% csrf_token %}
+			    <input type="text" name="search" class="form-control" style="width:600px"placeholder="Search" onkeydown='if(event.keyCode==13){gosubmit();}'/> 
+					<input type="hidden" name="username"/> 
+			</form>
+			<div style="background-color:#D0D0D0;margin-top:20px;padding:10px;min-height:100px;width:600px;border-radius:15px;">
+					<h3>ITEMS:</h3>
+					<ul>
+					{% for item in items %}
+					<div style="background-color:#E0E0E0;margin:5px">
+						<font size="4"><li> {{item}}</li></font>
+					</div>
+					{% endfor %}
+					{% if user.is_authenticated %}
+					    <p>Welcome, {{ user.username }}. Thanks for logging in.</p>
+					{% else %}
+					    <p>Welcome, new user. Please log in.</p>
+					{% endif %}
+					</ul>
+			</div>
+		</div>
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="/static/dist/js/bootstrap.min.js"></script>
+    <script src="/static/assets/js/docs.min.js"></script>
+  </body>
+</html>

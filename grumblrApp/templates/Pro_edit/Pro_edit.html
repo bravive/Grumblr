@@ -1,0 +1,83 @@
+{% extends "../templates/Basepage.html" %}
+{% block title%} Pro_edit {% endblock %}
+{% block myjs %}{% endblock%}
+{% block csstheme %}<link href="/static/Pro_edit/theme.css" rel="stylesheet">{% endblock %}
+{% block navbar %}
+<ul class="nav navbar-nav">
+  <li><a href="{% url 'grumblrApp_home' %}">Home</a></li>
+  <li><a href="{% url 'grumblrApp_profile' %}">Profile</a></li>
+  <li class="active"><a href="#contact">Settings</a></li>
+</ul>
+{% endblock %}
+{% block personal_info%}
+<div class="panel panel-default">
+  <div class="panel-body">
+    <div><b>Username</b>: {{user_name}}</div>
+	<div><b>Email</b>: {{user_email}}</div>
+  </div>
+</div>
+{% endblock %}
+{% block leftfunctionform%}
+<div style="height:40px; width:350px"></div>
+
+<div style="height:40px; width:350px"></div>
+
+{% endblock%}
+{% block big_photo %}
+	{% if id %}
+		<img src="{% url 'grumblrApp_photo' id %}" alt="{{entry.first_name.value}} {{entry.last_name.value}}" width="350px">
+	{% else %}
+		<img src="/static/Image/default.jpg"  alt="Cat-Downloaded"/>
+	{% endif %}
+{% endblock %}
+
+{% block rightcontent %}
+<div class="navbar-form navbar-right">
+	<div class="jumbotron" style="margin-right:100px;margin-top:8px;padding:10px;width:500px">
+        <div class="list-group" style="width:200px">
+            <a href="#" class="list-group-item active" >Edit Account   >>></a>
+        </div>
+		<form enctype="multipart/form-data" action="{% url 'grumblrApp_edit' id %}" method="post">
+		<table>
+		{{form_entry}}
+		</table>
+		<input type="submit" value="Save" class="btn btn-primary" style="margin-left:400px">
+		{% csrf_token %}
+		</form>
+	</div>
+    <div class="jumbotron" style="margin-right:100px;margin-top:8px;padding:10px;width:500px">
+        <div class="list-group" style="width:200px">
+            <a href="#" class="list-group-item active" >Change Password   >>></a>
+        </div>
+        <div>
+            <table>
+                <!--clean__class()&self_validation are in field_errors, but field_errors are under visible_fields.-->
+                {% if form_message %}
+                <td><font size="4" color="green"><ul><li>{{form_message}}</li></ul></font></td><nobr>
+
+                {% endif %}
+                {% for field in form_errors.visible_fields %}
+                {% if field.errors %}
+                <tr>
+                    <td><font size="2" color="red">{{field.errors}}</font></td><nobr>
+                </tr>
+                {% endif %}
+                {% endfor %}
+                <!--clean() errors always in non_field_errors-->
+                {% for field in form_errors.non_field_errors %}
+                <tr>
+                    <td><font size="2" color="red"><ul><li>{{field}}</li></ul></font></td><nobr>
+                </tr>
+                {% endfor %}
+            </table>					
+        </div>
+        <form action="{% url 'grumblrApp_changepassword' %}" method="post">
+            {% for field in form_password.visible_fields%}
+            {{field}}
+            {% endfor %}
+            <br><input type="submit" value="Save" class="btn btn-primary" style="margin-left:400px">
+                {% csrf_token %}
+        </form>
+    </div>
+</div>
+{% endblock %}

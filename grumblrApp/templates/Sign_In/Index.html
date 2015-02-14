@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="/static/Image/The letter G.jpg">
+
+    <title>Sign In</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="/static/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="/static/Sign_In/jumbotron.css" rel="stylesheet">
+		<link href="/static/myCss/mycss.css" rel="stylesheet">
+
+    <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
+    <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+    <script src="/static/assets/js/ie-emulation-modes-warning.js"></script>
+
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="/static/assets/js/ie10-viewport-bug-workaround.js"></script>
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+
+  <body>
+    <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+      <div class="container">
+        <div class="navbar-header">
+          <span class="icon-bar"></span>
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">Grumblr</a>
+        </div>
+        <div class="navbar-collapse collapse" >
+          <form action="{% url 'grumblrApp_mylogin'%}" method="post" class="navbar-form navbar-right" role="form">
+						{% csrf_token %}
+            {% for field in form_login.visible_fields %}
+            <div class="form-group">
+                {{field}}
+            </div>
+            {% endfor %}
+           	<input type="submit" class="btn btn-success" value='Sign in'>
+        </form>
+		<a href="{% url 'grumblrApp_forgotpassword' %}"><p class="word_postion"><font color="aa0000"><u>Forgot Password</u></font></p></a>
+        </div><!--/.navbar-collapse -->
+      </div>
+    </div>
+		{% if errors_login %}
+			<div style="float:right;color:red;margin-right:100px">
+				<font size="3" >
+					* Incorrect user name and password.
+				</font>
+			</div>
+		{% endif %}
+    <!-- Main jumbotron for a primary marketing message or call to action -->
+    
+    <div class="jumbotron">
+    	<div style="height:450px;min-width:1100px">
+				
+		   	<div class="container myclass-contraint">
+		       <h1>Welcome to Grumblr</h1>
+		       <p>Connect with your friends — and other fascinating people. 
+		       Get in-the-moment updates on the things that interest you.
+		        And watch events unfold, in real time, from every angle(By twitter).
+		       </p>
+			  </div>
+		    <div class="navbar-collapse collapse">  
+			    <form action="{% url 'grumblrApp_myregister' %}" method="post" class="navbar-form navbar-right myform-width460"role="form">
+			      {% csrf_token %}
+						<div>
+			     	  <h1>Join In Now!</h1>
+			      </div>
+						<div>
+											
+							<table>
+								<!--clean__class()&self_validation are in field_errors, but field_errors are under visible_fields.-->
+								{% for field in form_reg.visible_fields %}
+									{% if field.errors %}
+									<tr>
+										<td><font size="2" color="red">{{field.errors}}</font></td><nobr>
+									</tr>
+									{% endif %}
+								{% endfor %}
+								<!--clean() errors always in non_field_errors-->
+								{% for field in form_reg.non_field_errors %}
+									<tr>
+										<td><font size="2" color="red"><ul><li>{{field}}</li></ul></font></td><nobr>
+									</tr>
+								{% endfor %}
+							</table>					
+						</div>
+						{% for field in form_reg.visible_fields %}
+						<div class="form-group myclass-formPadding">
+								{{field}}<nobr>
+						</div>
+						{% endfor %}
+				   	<input type="submit" class="btn btn-success mybtn-style" Value="Register">
+					</form>
+				</div><!--/.navbar-collapse -->	
+    	</div>
+    </div>
+
+    <div class="container">
+      <hr>
+      <footer>
+        <p>&copy; Workshop 2014</p>
+      </footer>
+    </div> <!-- /container -->
+
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="/static/dist/js/bootstrap.min.js"></script>
+  </body>
+</html>

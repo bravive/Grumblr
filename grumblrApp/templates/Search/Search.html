@@ -1,0 +1,65 @@
+{% extends "../templates/Basepage.html" %}
+{% block title %}Search{% endblock%}
+{% block csstheme %}<link href="/static/Search/theme.css" rel="stylesheet">{% endblock %}
+{% block icon %} Searching...{% endblock %}
+{% block navbar %}
+	<ul class="nav navbar-nav">
+	  <li><a href="{% url 'grumblrApp_home' %}">Home</a></li>
+	  <li ><a href="{% url 'grumblrApp_profile' %}">Profile</a></li>
+	  <li ><a href="{% url 'grumblrApp_pro_edit' %}">Settings</a></li>
+	</ul>
+{% endblock %}
+{% block searchform %}{% endblock %}
+{% block mainbody %}
+	<form action="{% url 'grumblrApp_search' %}" method="get" role="search">
+		{% for field in form_search.visible_fields %}
+			{{field}}
+		{% endfor %}
+	</form>
+	<div style="background-color:#D0D0D0;margin-top:20px;padding:10px;min-height:100px;width:600px;border-radius:15px;">
+
+	
+			
+			<h2><span class="label label-default">Users:</span></h2>
+			<ul>
+				{% for item in following_usernames %}
+				<form action="{% url 'grumblrApp_addunfollowing' %}" id="form_addunfollowing" method="post">
+					{% csrf_token %}
+					{% for field in form_relation.visible_fields %}
+						{{field}}
+					{% endfor %}
+				</form>
+				<button  type="submit" form="form_addunfollowing" name="unfollowed_username" value="{{item}}" class="btn btn-default">To UnFollow!</button>
+						<a href="{% url 'grumblrApp_profile_others_username' item %}"> {{item}}</a><br>
+					</font>
+				</span>
+				
+				</a>
+				{% endfor %}
+				
+				{% for item in unfollowing_usernames %}
+                    <form action="{% url 'grumblrApp_addfollowing' %}" id="form_addfollowing" method="post">
+                        {% csrf_token %}
+                        {% for field in form_relation.visible_fields %}
+                            {{field}}
+                        {% endfor %}
+                    </form>
+                    <button type="submit" form="form_addfollowing" name="followed_username" value="{{item}}" class="btn btn-success">To Follow</button>
+                    <font size="4">
+                        <a href="{% url 'grumblrApp_profile_others_username' item %}"> {{item}}</a>
+                    </font>
+			    {% endfor %}
+		  </ul>
+			
+			
+			<h2><span class="label label-default">Grumbls:</span></h2>
+			<ul>
+				{% for item in items_grumbls_residuals %}
+				<div style="background-color:#E0E0E0;margin:5px">
+					<font size="4"><li> <a href="{% url 'grumblrApp_profile_others' item.id %}"> <strong>{{item.user.username}}</strong></a> :{{item}}</li></font>
+				</div>
+				{% endfor %}
+			</ul>
+	</div>
+{% endblock %}
+
